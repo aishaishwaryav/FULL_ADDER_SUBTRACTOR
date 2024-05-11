@@ -47,18 +47,15 @@ FULL SUBTRACTOR
 
 Write the detailed procedure here
 ```
-**Full Adder:**
-1.Open Quartus II and create a new project.
-2.Use schematic design entry to draw the full adder circuit. 
-3.The circuit consists of XOR, AND, and OR gates. 
-4.Compile the design, verify its functionality through simulation. 
-5.Implement the design on the target device and program it.
+STEP-1 Open Quartus Prime software.
 
-**Full Subtractor:** 
-1.Follow the same steps as for the full adder. 
-2.Draw the full subtractor circuit using schematic design. 
-3.The circuit includes XOR, AND, OR gates to perform subtraction. 
-4.Compile, simulate, implement, and program the design similarly to the full adder.
+STEP-2 Create a new project and select the target FPGA device.
+
+STEP-3 Design and implement the full adder/subtractor using Verilog or VHDL within a new HDL file.
+
+STEP-4 Add the HDL file to the project and compile the design.
+
+STEP-5 Program the FPGA with the compiled design to test the functionality of the full adder/subtractor.
 ```
 
 **Program:**
@@ -66,27 +63,15 @@ Write the detailed procedure here
 /* Program to design a half subtractor and full subtractor circuit and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
 */
 ```
-## Full_adder
-module fulladd_top(a,b,cin,sum,carry);
-input a,b,cin;
-output sum,carry;
-wire w1,w2,w3,w4;       
-xor(w1,a,b);
-xor(sum,w1,cin);        
-
-and(w2,a,b);
-and(w3,b,cin);
-and(w4,cin,a);
-
-or(carry,w2,w3,w4);
-endmodule 
-
-## Full_subtractor
-module fullsub_top(a,b,Bin,BO,DIFF);
-input a,b,Bin;
-output BO,DIFF;
-assign DIFF = a ^ b ^ Bin;
-  assign BO = (a & b) | ((a ^ b) & Bin);
+module fulladdsub(a,b,c,sum,carry,BO,DIFF);
+input a,b,c;
+output sum,carry,BO,DIFF;
+assign sum=a^b^c;
+assign carry= a&b | a&c | b&c;
+wire a0;
+not (a0,a);
+assign BO= b&c | a0&c | a0&b;
+assign DIFF=a^b^c;
 endmodule
 
 Developed by: AISHWARYA V
@@ -94,15 +79,17 @@ RegisterNumber: 212223220003
 ```
 
 **RTL Schematic**
-![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/3ca795b7-1f80-4cae-82f4-965455767553)
+
+![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/3d983108-fc52-4710-888e-8274ea3a5efc)
 
 
 **Output Timing Waveform**
 FULL ADDER
-![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/7126e21a-699a-439a-b7f6-6e50b4657ed3)
+
+![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/5432f2be-76aa-4fd7-a708-d91794f3ced9)
 
 FULL SUBTRACTOR
-![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/43ddad8f-8aa7-4fbf-9014-634b695b4c35)
+![image](https://github.com/aishaishwaryav/FULL_ADDER_SUBTRACTOR/assets/151565589/415b2781-629b-47e7-86e0-d197ed566a20)
 
 
 **Result:**
